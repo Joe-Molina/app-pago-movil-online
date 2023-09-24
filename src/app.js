@@ -4,18 +4,11 @@ import { fileURLToPath } from "url";
 import ejs from "ejs";
 import bodyParser from "body-parser";
 import mysql from "mysql2";
-import myConnection from "express-myconnection";
 import session from "express-session";
-import {
-  DB_HOST,
-  DB_PORT,
-  DB_DATABASE,
-  DB_USER,
-  DB_PASSWORD,
-} from "./config.js";
 import methodOverride from "method-override";
-import login from "./routes/login.route.js";
-import register from "./routes/register.route.js";
+import Register from "./routes/ClientRegister.routes.js";
+import Login from "./routes/ClientLogin.routes.js";
+import Products from "./routes/Products.routes.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -40,20 +33,10 @@ app.use(
 );
 app.use(methodOverride("_method"));
 
-app.use(
-  myConnection(mysql, {
-    host: DB_HOST,
-    user: DB_USER,
-    password: DB_PASSWORD,
-    database: DB_DATABASE,
-    port: DB_PORT,
-  })
-);
-
 //routes
-app.use(login);
-app.use(register);
-app.use(index);
+app.use(Register);
+app.use(Login);
+app.use(Products);
 
 //route not found
 app.use((req, res, next) => {
