@@ -1,12 +1,24 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../database/database.js";
-import { BillDetails } from "./BillDetails.js";
+import { SaleOrders } from "../models/SaleOrders.js";
 
-export const Bills = sequelize.define("Bills", {
+export const PM = sequelize.define("PM", {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
     autoIncrement: true,
+  },
+  banco: {
+    type: DataTypes.STRING,
+  },
+  telefono: {
+    type: DataTypes.INTEGER,
+  },
+  cedula: {
+    type: DataTypes.INTEGER,
+  },
+  referencia: {
+    type: DataTypes.INTEGER,
   },
 });
 
@@ -22,4 +34,4 @@ const crearRelacion = (PK, FK, FK_name) => {
   });
 };
 
-crearRelacion(Bills, BillDetails, "Bill_id");
+crearRelacion(PM, SaleOrders, "Pm_id");

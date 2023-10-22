@@ -6,10 +6,9 @@ import { Sections } from "../models/sections.js";
 export const getProducts = async (req, res) => {
   try {
     const products = await Products.findAll();
+    const sections = await Sections.findAll();
 
-    console.log(products);
-
-    res.json(products);
+    res.render("inicio", { sections, products });
   } catch (error) {
     res.status(500);
   }
@@ -27,7 +26,10 @@ export const createProduct = async (req, res) => {
 
     console.log(newProduct);
 
-    res.json(newProduct);
+    const products = await Products.findAll();
+    const sections = await Sections.findAll();
+
+    res.render("inicio", { sections, products });
   } catch (error) {
     res.status(500);
   }

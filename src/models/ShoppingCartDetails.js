@@ -7,6 +7,9 @@ export const ShoppingCartDetails = sequelize.define("ShoppingCartDetails", {
     primaryKey: true,
     autoIncrement: true,
   },
+  ShoppingCart_id: {
+    type: DataTypes.INTEGER,
+  },
   Cantidad: {
     type: DataTypes.INTEGER,
   },

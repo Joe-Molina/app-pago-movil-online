@@ -4,7 +4,11 @@ import { Clients } from "../models/clients.js";
 import { ShoppingCarts } from "../models/ShoppingCarts.js";
 
 export const getRegister = async (req, res) => {
-  //res.render("register", { error: false });
+  if (req.session.loggedin != true) {
+    res.render("register", { error: false });
+  } else {
+    res.redirect("/Products");
+  }
 };
 
 export const PostRegister = async (req, res) => {
@@ -16,7 +20,7 @@ export const PostRegister = async (req, res) => {
   });
 
   if (clients) {
-    return res.json({ estado: "usuario ya registrado" });
+    return res.render("register", { error: "usuario ya registrado" });
   } else {
     const newClient = await Clients.create({
       name,
@@ -32,6 +36,6 @@ export const PostRegister = async (req, res) => {
       Client_id: newClient.dataValues.id,
       name: newClient.dataValues.name,
     });
-    res.status(200).json([newShoppingCart, newClient]);
+    res.render("login", { error: false });
   }
 };

@@ -13,9 +13,9 @@ import {
 const router = Router();
 
 router.get("/Products", getProducts);
-router.post("/Products", createProduct);
+router.post("/Products/add", createProduct);
 router.put("/Products/:id", updateProduct);
-router.delete("/Products/:id", deleteProduct);
+router.delete("/Products/update/:id", deleteProduct);
 router.get("/Products/:id", getProduct);
 
 router.get("/section", getSection);

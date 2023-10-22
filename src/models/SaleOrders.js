@@ -8,9 +8,6 @@ export const SaleOrders = sequelize.define("SaleOrders", {
     primaryKey: true,
     autoIncrement: true,
   },
-  DateTime: {
-    type: DataTypes.DATE,
-  },
 });
 
 const crearRelacion = (PK, FK, FK_name) => {

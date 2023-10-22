@@ -8,9 +8,6 @@ export const ShoppingCarts = sequelize.define("ShoppingCarts", {
     primaryKey: true,
     autoIncrement: true,
   },
-  name: {
-    type: DataTypes.STRING,
-  },
 });
 
 const crearRelacion = (PK, FK, FK_name) => {

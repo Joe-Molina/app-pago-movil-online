@@ -1,8 +1,15 @@
 import session from "express-session";
 import bodyParser from "body-parser";
 import { Clients } from "../models/clients.js";
+import { ShoppingCarts } from "../models/ShoppingCarts.js";
 
-export const getLogin = async (req, res) => {};
+export const getLogin = async (req, res) => {
+  if (req.session.loggedin != true) {
+    res.render("login", { error: false });
+  } else {
+    res.redirect("/");
+  }
+};
 
 export const postLogin = async (req, res) => {
   const { Email, Password } = req.body;
@@ -12,19 +19,26 @@ export const postLogin = async (req, res) => {
   });
 
   if (!client) {
-    return res.json({ user: "no existe" });
+    res.render("login", { error: "el usuario no existe" });
   } else {
     console.log(client.dataValues.Password);
-    if (req.body.Password !== client.dataValues.Password) {
-      return res.json({ Password: "is incorrect" });
+    if (Password !== client.dataValues.Password) {
+      return res.render("login", { error: "contraseña incorrecta" });
     } else {
       req.session.loggedin = true;
-      req.session.user = client.dataValues.id;
+      req.session.userId = client.dataValues.id;
       req.session.name = client.dataValues.name;
       req.session.email = client.dataValues.Email;
+
+      const shoppingcart = await ShoppingCarts.findOne({
+        where: { Client_id: req.session.userId },
+      });
+
+      req.session.cartId = shoppingcart.id;
+
       console.log(req.session);
 
-      res.json({ Password: "is correct" });
+      res.render("inicio");
     }
   }
 };
