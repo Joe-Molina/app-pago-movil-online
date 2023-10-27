@@ -3,13 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/inicio.css">
+    <link rel="stylesheet" href="/css/header.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <title>inicio</title>
 </head>
 <body>
-    
+  <%- include('components/header.ejs') %>
+  <div class="admin-table">
+
     <form action="/products/add" method="POST">
-        <div class="mb-3">
+      <h2>CREAR PRODUCTO</h2>
+        <div class="mb-3"> 
             <label  class="form-label">nombre del producto</label>
             <input type="text" class="form-control" name="name">
           </div>
@@ -27,21 +32,90 @@
                 <option value="<%=section.id%>"><%= section.name %></option>             
             <% }) %>
           </select>
+          <br>
           <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 
-    <div>
-        <% products.forEach(product => { %>
-         <article>
-            <h3><%= product.name %></h3>
-            <p><%= product.price %></p>
-         </article>
-        <% }) %>
+    <form action="/section" method="POST">
+      <h2>CREAR SECCION</h2>
+      <div class="mb-3"> 
+          <label  class="form-label">Nombre de la nueva seccion</label>
+          <input type="text" class="form-control" name="name">
+      </div>
+      
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <div class="sections-table">
+      <h2>ELIMINAR SECCION</h2>
+      <% sections.forEach(section => { %>
+        <article>
+          <b><%= section.name %></b>
+          <button class="btn btn-delete" data-sectionid="<%=section.id %>">Eliminar</button>
+        </article>
+      <% }) %>
+    </div>
+
+  </div>
+    
+
+    <div class="products-table">
+        <h2>PRODUCTOS</h2>
+
+        <section class="products">
+          <% products.forEach(product => { %>
+            <article class="product-card">
+               <img src="" alt="">
+               <h3><%= product.name %></h3>
+               <p>Precio: <%= product.price %>$</p>
+               <p>Descripcion: <%= product.description %></p>
+               <button class="btn btn-delete2" data-productid="<%=product.id %>">Eliminar</button>
+            </article>
+           <% }) %>
+        </section>
     </div>
     
 
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+    // Obtén todos los botones de eliminación por su clase
+    const deleteButtons = document.querySelectorAll('.btn-delete');
+    const deleteButtons2 = document.querySelectorAll('.btn-delete2');
+
+    // Agrega un controlador de eventos a cada botón de eliminación
+    deleteButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      // Obtiene el ID de la sección desde el atributo de datos
+      const sectionId =  button.dataset.sectionid;
+      // Realiza la solicitud de eliminación utilizando fetch
+      console.log(sectionId)
+      fetch(`/section/${sectionId}`, {
+        method: 'DELETE'
+
+      })
+      location.reload(true);
+      location.reload(true);
+    });
+  });
+
+  deleteButtons2.forEach(button => {
+    button.addEventListener('click', () => {
+      // Obtiene el ID de la sección desde el atributo de datos
+      const productid =  button.dataset.productid;
+      // Realiza la solicitud de eliminación utilizando fetch
+      console.log(productid)
+      fetch(`/products/delete/${productid}`, {
+        method: 'DELETE'
+
+      })
+      location.reload(true);
+      location.reload(true);
+    });
+  });
+});
+    </script>
 </body>
 </html>

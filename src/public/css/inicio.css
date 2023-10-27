@@ -1,0 +1,81 @@
+.admin-table{
+    display: flex;
+
+}
+
+.admin-table form{
+    width: 30%;
+    margin: 3%;
+    padding: 1%;
+    background-color: rgb(60, 60, 60);
+    color: #ffffff;
+}
+
+.admin-table .sections-table{
+    width: 30%;
+    margin: 3%;
+    padding: 1%;
+    background-color: rgb(60, 60, 60);
+    color: #ffffff;
+    max-height: 450px;
+    overflow: auto;
+}
+
+.admin-table .sections-table article{
+    display: flex;
+    justify-content: space-between;
+    margin: 20px;
+}
+
+
+.products-table{
+    width: 100vw;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+}
+
+.products-table h2{
+text-align: center;
+}
+
+.products-table section{
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap; 
+}
+
+.product-card{
+    width: 200px;
+    height: 270px;
+    background-color: rgb(60, 60, 60);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 30px;
+    padding: 10px;
+    color: aliceblue;
+}
+
+.product-card > img{
+    width: 100%;
+    height: 100px;
+}
+.sections-table .btn{
+    background-color: rgb(163, 29, 29);
+    color: #ffffff;
+}
+.sections-table .btn:hover{
+    background-color: rgb(136, 25, 25);
+    color: #ffffff;
+}
+
+.products-table .btn{
+    background-color: rgb(163, 29, 29);
+    color: #ffffff;
+}
+.products-table .btn:hover{
+    background-color: rgb(136, 25, 25);
+    color: #ffffff;
+}

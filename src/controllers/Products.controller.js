@@ -83,7 +83,7 @@ export const createSection = async (req, res) => {
       name,
     });
 
-    res.status(200).json("seccion creada");
+    res.redirect("/products");
   } catch (error) {
     res.status(500);
   }

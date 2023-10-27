@@ -38,7 +38,7 @@ export const postLogin = async (req, res) => {
 
       console.log(req.session);
 
-      res.render("inicio");
+      res.redirect("/products");
     }
   }
 };

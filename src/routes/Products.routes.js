@@ -15,7 +15,7 @@ const router = Router();
 router.get("/Products", getProducts);
 router.post("/Products/add", createProduct);
 router.put("/Products/:id", updateProduct);
-router.delete("/Products/update/:id", deleteProduct);
+router.delete("/Products/delete/:id", deleteProduct);
 router.get("/Products/:id", getProduct);
 
 router.get("/section", getSection);
