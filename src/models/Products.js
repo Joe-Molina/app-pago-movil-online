@@ -19,6 +19,9 @@ export const Products = sequelize.define("Products", {
   description: {
     type: DataTypes.STRING,
   },
+  photo: {
+    type: DataTypes.STRING,
+  },
 });
 
 const crearRelacion = (PK, FK, FK_name) => {

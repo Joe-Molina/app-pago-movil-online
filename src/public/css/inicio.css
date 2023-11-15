@@ -1,6 +1,10 @@
+body{
+    background-color: #ffe5f0;
+}
+
 .admin-table{
     display: flex;
-
+    
 }
 
 .admin-table form{
@@ -33,34 +37,49 @@
     background-color: #ffffff;
     display: flex;
     flex-direction: column;
+    max-width: 1280px;
+    margin: 0 auto;
+    font-family: "Agbalumo";
 }
 
 .products-table h2{
 text-align: center;
+font-size: 64px;
+color: #ff97d9;
 }
 
 .products-table section{
-    width: 100vw;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap; 
+    justify-content: center;
 }
 
 .product-card{
-    width: 200px;
-    height: 270px;
-    background-color: rgb(60, 60, 60);
+    width: 250px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin: 30px;
+    border-radius: 10px;
+    margin: 20px;
     padding: 10px;
-    color: aliceblue;
+    color: #b83b75;
+    transition: .3s;
+}
+
+.product-card:hover{
+    transform: scale(1.1);
+    background-color: #fff1f7;
 }
 
 .product-card > img{
+    height: auto;
+    max-height: 200px;
     width: 100%;
-    height: 100px;
+    max-width: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+    border-radius: 10px;
 }
 .sections-table .btn{
     background-color: rgb(163, 29, 29);
@@ -71,11 +90,24 @@ text-align: center;
     color: #ffffff;
 }
 
-.products-table .btn{
-    background-color: rgb(163, 29, 29);
+.products-table .btn-delete2{
+    background-color: rgb(255, 255, 255);
+    color: #ffffff;
+    width: 50px;
+    height: 50px;
+}
+.products-table .btn-delete2:hover{
+    background-color: rgb(255, 0, 0);
     color: #ffffff;
 }
-.products-table .btn:hover{
-    background-color: rgb(136, 25, 25);
+
+.products-table .btn-add-carrito{
+    background-color: rgb(252, 204, 255);
+    color: #ffffff;
+    width: 50px;
+    height: 50px;
+}
+.products-table .btn-add-carrito:hover{
+    background-color: rgb(229, 136, 255);
     color: #ffffff;
 }

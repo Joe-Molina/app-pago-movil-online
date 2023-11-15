@@ -1,22 +1,38 @@
 import bodyParser from "body-parser";
 import session from "express-session";
 import { ShoppingCartDetails } from "../models/ShoppingCartDetails.js";
+import { Products } from "../models/Products.js";
+import { Sections } from "../models/sections.js";
 
 export const getShoppingcartProducts = async (req, res) => {
-  // buscar productos en el carrito
-  const productos = await ShoppingCartDetails.findAll({
-    where: {
-      ShoppingCart_id: req.session.cartId,
-    },
-  });
+  if (req.session.loggedin == true) {
+    // buscar productos en el carrito
+    const productos = await ShoppingCartDetails.findAll({
+      where: {
+        ShoppingCart_id: req.session.cartId,
+      },
+      include: [
+        {
+          model: Products,
+          atributes: ["name", "price"],
+        },
+      ],
+    });
 
-  res.json(productos);
+    console.log(productos);
+
+    res.json(productos);
+    //res.render("carrito", { productos });
+  } else {
+    res.redirect("/login");
+  }
 };
 
 export const addShoppingcartProduct = async (req, res) => {
   try {
     //guarda los datos del req.body
-    const { Product_id, Cantidad } = req.body;
+    const Product_id = req.params.id;
+    const { Cantidad } = req.body;
 
     // crear registro en detalles del carrito
     const newCartDetail = await ShoppingCartDetails.create({

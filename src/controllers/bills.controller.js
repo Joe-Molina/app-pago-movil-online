@@ -6,8 +6,12 @@ import { SaleOrderDetails } from "../models/SaleOrderDetails.js";
 import { SaleOrders } from "../models/SaleOrders.js";
 
 export const getBills = async (req, res) => {
-  const bills = await Bills.findAll();
-  res.json(bills);
+  if (req.session.loggedin == true) {
+    const bills = await Bills.findAll();
+    res.json(bills);
+  } else {
+    res.redirect("/login");
+  }
 };
 
 export const createBill = async (req, res) => {

@@ -25,6 +25,9 @@ export const Clients = sequelize.define("clients", {
   Password: {
     type: DataTypes.STRING,
   },
+  UserType: {
+    type: DataTypes.INTEGER,
+  },
 });
 
 const crearRelacion = (PK, FK, FK_name) => {

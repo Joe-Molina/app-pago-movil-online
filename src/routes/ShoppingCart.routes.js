@@ -8,7 +8,7 @@ import {
 const router = Router();
 
 router.get("/shoppingcart", getShoppingcartProducts);
-router.post("/shoppingcart/add", addShoppingcartProduct);
+router.post("/shoppingcart/add/:id", addShoppingcartProduct);
 router.delete("/shoppingcart/delete/:id", deleteShoppingcartProduct);
 
 export default router;

@@ -29,12 +29,15 @@ export const postLogin = async (req, res) => {
       req.session.userId = client.dataValues.id;
       req.session.name = client.dataValues.name;
       req.session.email = client.dataValues.Email;
+      req.session.UserType = client.dataValues.UserType;
 
       const shoppingcart = await ShoppingCarts.findOne({
         where: { Client_id: req.session.userId },
       });
 
-      req.session.cartId = shoppingcart.id;
+      if (req.session.UserType === 1) {
+        req.session.cartId = shoppingcart.id;
+      }
 
       console.log(req.session);
 

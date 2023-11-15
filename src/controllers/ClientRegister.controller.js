@@ -28,6 +28,7 @@ export const PostRegister = async (req, res) => {
       lastName,
       Direction,
       Password,
+      UserType: 1,
     });
 
     console.log(newClient);

@@ -1,20 +1,88 @@
 body{
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
     width: 100vw;
     height: 100vh;
-    box-sizing: border-box;
+    
+    display: flex;
+}
+
+section{
+    width: 50%;
+    height: 100%;
+}
+
+.login-presentacion{
+    padding: 0 50px;
+    background-image: url(../assets/galletacomia.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-origin: initial;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between ;
+    font-family:  'Inter', sans-serif;
+    font-weight: 900;
+}
+
+.login-presentacion h2{
+    font-size: 90px;
+    margin-bottom: 40px;
+    text-align: end;
+    color: black;
+    font-weight: 800;
+}
+
+.login-presentacion-title{
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.login-presentacion-title h2{
+    display: inline;
+    font-size: 64px;
+    color: #FF76D9;
+}
+
+.login-presentacion-title img{
+    width: 200px;
+    height: 200px;
+}
+
+.login-form{
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
-    font-weight: bold;
-    background-color: rgb(27, 24, 65);
+    background-image: url(../assets/galletasrosa.png);
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 form{
-    color: aliceblue;
+
+    width: 300px;
+    height: auto;
+    color: rgb(0, 0, 0);
     width: 500px;
-    background-color: rgb(47, 47, 47);
+    background-color: #ffffff;
     padding: 50px;
+    border-radius: 20px;
+    transition: .2s;
+    
 }
+
+form:hover{
+    transform: scale(1.05);
+}
+
+form p{
+    text-align: center;
+    font-weight: 700;
+    font-size: 20px;
+}
+

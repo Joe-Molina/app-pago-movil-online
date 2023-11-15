@@ -1,7 +1,6 @@
 import app from "./app.js";
 import { sequelize } from "./database/database.js";
 
-
 import "./models/pm.js";
 import "./models/BillDetails.js";
 import "./models/Bills.js";

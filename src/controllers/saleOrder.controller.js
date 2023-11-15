@@ -7,9 +7,14 @@ import { PM } from "../models/pm.js";
 
 export const getSaleOrders = async (req, res) => {
   // muestra las ordenes de venta pendientes por aceptar
-  const saleOrdersArray = await SaleOrders.findAll();
 
-  res.json(saleOrdersArray);
+  if (req.session.loggedin == true) {
+    const saleOrdersArray = await SaleOrders.findAll();
+
+    res.json(saleOrdersArray);
+  } else {
+    res.redirect("/login");
+  }
 };
 
 export const createSaleOrder = async (req, res) => {

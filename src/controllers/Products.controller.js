@@ -1,14 +1,23 @@
 import session from "express-session";
 import bodyParser from "body-parser";
+import multer from "multer";
 import { Products } from "../models/Products.js";
 import { Sections } from "../models/sections.js";
 
 export const getProducts = async (req, res) => {
   try {
-    const products = await Products.findAll();
-    const sections = await Sections.findAll();
-
-    res.render("inicio", { sections, products });
+    if (req.session.loggedin == true) {
+      const products = await Products.findAll();
+      const sections = await Sections.findAll();
+      console.log(req.session.UserType);
+      res.render("inicio", {
+        sections,
+        products,
+        usertype: req.session.UserType,
+      });
+    } else {
+      res.redirect("/login");
+    }
   } catch (error) {
     res.status(500);
   }
@@ -16,11 +25,12 @@ export const getProducts = async (req, res) => {
 export const createProduct = async (req, res) => {
   try {
     const { name, price, description, Section_id } = req.body;
-
+    console.log(req.file);
     const newProduct = await Products.create({
       name,
       price,
       description,
+      photo: req.file.filename,
       Section_id,
     });
 
@@ -29,7 +39,7 @@ export const createProduct = async (req, res) => {
     const products = await Products.findAll();
     const sections = await Sections.findAll();
 
-    res.render("inicio", { sections, products });
+    res.redirect("/products");
   } catch (error) {
     res.status(500);
   }
