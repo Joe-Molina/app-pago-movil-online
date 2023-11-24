@@ -4,14 +4,29 @@ import { ShoppingCartDetails } from "../models/ShoppingCartDetails.js";
 import { SaleOrders } from "../models/SaleOrders.js";
 import { SaleOrderDetails } from "../models/SaleOrderDetails.js";
 import { PM } from "../models/pm.js";
+import { Clients } from "../models/clients.js";
 
 export const getSaleOrders = async (req, res) => {
   // muestra las ordenes de venta pendientes por aceptar
 
   if (req.session.loggedin == true) {
-    const saleOrdersArray = await SaleOrders.findAll();
+    const saleOrdersArray = await SaleOrders.findAll({
+      include: [
+        {
+          model: PM,
+        },
+        {
+          model: Clients,
+        },
+      ],
+    });
 
-    res.json(saleOrdersArray);
+    res.render("ordenesCompra", {
+      usertype: req.session.UserType,
+      saleOrdersArray,
+    });
+
+    //res.json(saleOrdersArray);
   } else {
     res.redirect("/login");
   }
@@ -53,8 +68,13 @@ export const createSaleOrder = async (req, res) => {
     }
   );
 
+  // elimina todos los productos del carrito
+  await ShoppingCartDetails.destroy({
+    where: { ShoppingCart_id: req.session.cartId },
+  });
+
   console.log(productosCarritoEspecific);
-  res.json(productosCarritoEspecific);
+  res.redirect("/shoppingcart");
   // console.log(productosCarrito);
   // res.json(ProductsOrderDetails);
 };
@@ -63,9 +83,11 @@ export const deleteSaleOrder = async (req, res) => {
   const { id } = req.params;
   //se elimina la orden de venta despues de aceptarla
 
-  const deleteOrder = await SaleOrders.destroy({
+  await SaleOrders.destroy({
     where: { id },
   });
+
+  res.redirect("/saleOrder");
 };
 
 // estoy creando la funcion que agrega todos los datos de la orden de venta de despues del carrito

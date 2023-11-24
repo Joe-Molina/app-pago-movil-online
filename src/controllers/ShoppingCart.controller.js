@@ -21,8 +21,7 @@ export const getShoppingcartProducts = async (req, res) => {
 
     console.log(productos);
 
-    res.json(productos);
-    //res.render("carrito", { productos });
+    res.render("carrito", { productos, usertype: req.session.UserType });
   } else {
     res.redirect("/login");
   }
@@ -56,6 +55,18 @@ export const deleteShoppingcartProduct = async (req, res) => {
     });
 
     res.json("producto eliminado del carrito");
+  } catch (error) {
+    res.json("no eliminado");
+  }
+};
+
+export const deleteAllShoppingcartProducts = async (req, res) => {
+  try {
+    await ShoppingCartDetails.destroy({
+      where: { ShoppingCart_id: req.session.cartId },
+    });
+
+    res.redirect("/products");
   } catch (error) {
     res.json("no eliminado");
   }

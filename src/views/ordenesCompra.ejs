@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/OrdenesCompra.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Agbalumo&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <title>Carrito</title>
+</head>
+<body>
+    <%-include('components/header.ejs')%>
+
+    <section class="saleOrders-content">
+
+        <% saleOrdersArray.forEach(saleOrder => { %>
+            
+                    <article class="saleOrder-card" >
+                        <h3 class="titulo">Orden #00<%= saleOrder.id  %></h3>
+                        <p class="saleOrder-fecha">creado: <%= saleOrder.createdAt %></p>
+                        <p class="titulo">Datos del Cliente</p>
+                        <p>Nombre y Apellido: <%= saleOrder.client.name %> <%= saleOrder.client.LastName %> </p>
+                        <p>Direccion: <%= saleOrder.client.Direction %></p>
+                        <p>Email: <%= saleOrder.client.Email %></p>
+                        <p class="titulo">Datos del Pago Movil</p>
+                        <p>Banco: <%= saleOrder.PM.banco %></p>
+                        <p>Telefono: <%= saleOrder.PM.telefono %></p>
+                        <p>Cedula/RIF: <%= saleOrder.PM.cedula  %></p>
+                        <p>Referencia: <%= saleOrder.PM.referencia  %></p>
+                        <div class="buttons">
+                            <button class="btn btn-danger" data-saleorderid="<%= saleOrder.id %>">Eliminar</button>
+                            <button class="btn btn-success" data-saleorderid="<%= saleOrder.id %>"  data-clientid="<%= saleOrder.client.id %>">Aceptar</button>
+                        </div>
+                    </article>
+         
+        <% }) %>
+
+    </section>
+
+
+</body>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</html>
+
+<script>
+    const deleteButtons = document.querySelectorAll(".btn-danger")
+    const successButtons = document.querySelectorAll(".btn-success")
+
+    deleteButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      // Obtiene el ID de la sección desde el atributo de datos
+      const saleOrder_id =  button.dataset.saleorderid;
+
+      // Realiza la solicitud de eliminación utilizando fetch
+      fetch(`/saleOrder/delete/${saleOrder_id}`, {
+        method: 'DELETE'
+
+      })
+      location.reload(true);
+    });
+  });
+
+  successButtons.forEach(button => {
+    button.addEventListener('click', () =>{
+      const Client_id = button.dataset.clientid;
+      const SaleOrder_id = button.dataset.saleorderid;
+
+      fetch('/bills/add', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ Client_id, SaleOrder_id }),
+    })
+      .then(response => {
+        if (response.ok) {
+          return fetch(`/saleOrder/delete/${SaleOrder_id}`, {
+            method: 'DELETE'
+          });
+        }
+
+    location.reload(true);
+    })
+  })
+
+})
+
+</script>

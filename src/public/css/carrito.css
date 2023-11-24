@@ -1,0 +1,71 @@
+body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.carrito{
+    height: 50vh;
+    overflow:auto;
+}
+
+.carrito table{
+    margin: 10px auto;
+    width:  90%;
+    text-align: center;
+}
+
+.carrito table tbody tr{
+    margin: 5px;
+}
+
+.carrito table img{
+    width: 100px;
+    height: 80px;
+}
+
+
+.pm{
+    width: 90%;
+    height: 39vh;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.orden-compra{
+    width: 55%;
+    height: 90%;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    background-color: #fdcae1;
+}
+
+.orden-compra .orden-info{
+    width: 50%;
+    padding: 20px;
+    color: rgb(80, 80, 80);
+
+}
+
+.orden-compra .pm-datos{
+    width: 50%;
+    padding: 20px;
+    color: rgb(80, 80, 80);
+
+}
+
+.pm-info{
+    width: 35%;
+    height: 90%;
+    padding: 20px;
+    color: rgb(80, 80, 80);
+    background-color: #fdcae1;
+}
+
+.pm-info form input{
+    margin: 5px 0;
+}

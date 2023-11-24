@@ -11,18 +11,20 @@ body{
     width: 30%;
     margin: 3%;
     padding: 1%;
-    background-color: rgb(60, 60, 60);
-    color: #ffffff;
+    background-color: #fdcae1;
+    color: #555;
+    border-radius: 20px;
 }
 
 .admin-table .sections-table{
     width: 30%;
     margin: 3%;
     padding: 1%;
-    background-color: rgb(60, 60, 60);
-    color: #ffffff;
+    background-color: #fdcae1;
+    color: #555;
     max-height: 450px;
     overflow: auto;
+    border-radius: 20px;
 }
 
 .admin-table .sections-table article{

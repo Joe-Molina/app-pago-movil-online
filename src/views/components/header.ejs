@@ -1,14 +1,37 @@
-<header>
-    <nav>
-        
-        <a href="/Products">Productos</a>
-        
-        <a href="/shoppingcart">Carrito</a>
-        
-        <img src="./assets/logobb.png" alt="">
-        <a href="/bills">Facturas</a>
 
-        <a href="/Logout">Cerrar Sesion</a>
+<% if (usertype == 1) { %>
+    <header>
+        <nav>
+            
+            <a href="/Products">Productos</a>
+            
+            <a href="/shoppingcart">Carrito</a>
+            
+            <img src="./assets/logobb.png" alt="">
+            <a href="/bills">Facturas</a>
+    
+            <a href="/Logout">Cerrar Sesion</a>
+    
+        </nav>
+    </header>
+<% } else if (usertype == 2) {%>
+    <header>
+        <nav>
+            <img src="./assets/logobb.png" alt="">
+            
+            <a href="/Products">Productos</a>
 
-    </nav>
-</header>
+            <a href="/saleOrder">ordenes de compra</a>
+            
+            <a href="/bills">Facturas</a>
+    
+            <a href="/Logout">Cerrar Sesion</a>
+    
+        </nav>
+    </header>
+
+    <% } %>
+
+
+
+

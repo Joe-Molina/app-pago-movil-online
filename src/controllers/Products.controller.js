@@ -22,6 +22,7 @@ export const getProducts = async (req, res) => {
     res.status(500);
   }
 };
+
 export const createProduct = async (req, res) => {
   try {
     const { name, price, description, Section_id } = req.body;
