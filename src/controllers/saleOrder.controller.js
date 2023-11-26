@@ -33,7 +33,7 @@ export const getSaleOrders = async (req, res) => {
 };
 
 export const createSaleOrder = async (req, res) => {
-  const { banco, telefono, cedula, referencia } = req.body;
+  const { banco, telefono, cedula, referencia, Monto } = req.body;
   // crea una orden de venta que tiene los datos del pm que se hizo y los productos que se desea comprar.
 
   //guarda los datos del pago movil que se hizo para realizar la compra
@@ -42,6 +42,7 @@ export const createSaleOrder = async (req, res) => {
     telefono,
     cedula,
     referencia,
+    Monto,
   });
 
   //crea una orden de compra con los datos del pm y el cliente

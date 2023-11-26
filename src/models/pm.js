@@ -20,6 +20,9 @@ export const PM = sequelize.define("PM", {
   referencia: {
     type: DataTypes.INTEGER,
   },
+  Monto: {
+    type: DataTypes.INTEGER,
+  },
 });
 
 const crearRelacion = (PK, FK, FK_name) => {

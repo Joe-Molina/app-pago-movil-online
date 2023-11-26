@@ -4,18 +4,40 @@ import { Bills } from "../models/Bills.js";
 import { BillDetails } from "../models/BillDetails.js";
 import { SaleOrderDetails } from "../models/SaleOrderDetails.js";
 import { SaleOrders } from "../models/SaleOrders.js";
+import { Clients } from "../models/clients.js";
 
 export const getBills = async (req, res) => {
   if (req.session.loggedin == true) {
-    const bills = await Bills.findAll();
-    res.json(bills);
+    if (req.session.UserType == 2) {
+      const bills = await Bills.findAll({
+        include: [
+          {
+            model: Clients,
+          },
+        ],
+      });
+      //res.json(bills);
+      res.render("bills", { bills, usertype: req.session.UserType });
+    } else {
+      const bills = await Bills.findAll({
+        where: { Client_id: req.session.userId },
+        include: [
+          {
+            model: Clients,
+          },
+        ],
+      });
+      //res.json(bills);
+      res.render("bills", { bills, usertype: req.session.UserType });
+    }
   } else {
     res.redirect("/login");
   }
 };
 
 export const createBill = async (req, res) => {
-  const { Client_id, SaleOrder_id } = req.body;
+  console.log("creando una factura");
+  const { Client_id, SaleOrder_id } = await req.body;
   //crea una factura con el id del cliente
 
   const newBill = await Bills.create({
